@@ -24,12 +24,12 @@
     "mongoose": "^8.1.1",
     "node-cron": "^3.0.3",
     "openai": "^4.28.0",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "typescript": "^5.3.3",
+    "@types/node": "^20.11.10",
+    "@types/node-cron": "^3.0.11"
   },
   "devDependencies": {
-    "@types/node": "^20.11.10",
-    "@types/node-cron": "^3.0.11",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "ts-node": "^10.9.2"
   }
 }
