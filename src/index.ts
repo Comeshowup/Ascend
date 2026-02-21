@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits, Collection } from 'discord.js';
 import mongoose from 'mongoose';
+import http from 'node:http';
 import { env } from './config/env';
 import { getCommandCollection, registerCommands } from './commands';
 import logger from './utils/logger';
@@ -40,6 +41,16 @@ async function main(): Promise<void> {
 
         // Register slash commands
         await registerCommands();
+
+        // Login to Discord
+        // Start health check server for Render
+        const PORT = parseInt(process.env.PORT || '10000', 10);
+        http.createServer((req, res) => {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('Ascend Core is running');
+        }).listen(PORT, () => {
+            logger.info(`🌐 Health check server listening on port ${PORT}`);
+        });
 
         // Login to Discord
         logger.info('🔑 Logging in to Discord...');
