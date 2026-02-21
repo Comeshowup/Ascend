@@ -39,8 +39,12 @@ async function main(): Promise<void> {
         await mongoose.connect(env.MONGODB_URI);
         logger.info('✅ MongoDB connected');
 
-        // Register slash commands
-        await registerCommands();
+        // Register slash commands (non-fatal — bot still works with existing registrations)
+        try {
+            await registerCommands();
+        } catch (err) {
+            logger.warn('⚠️ Slash command registration failed (bot will still run with existing commands):', err);
+        }
 
         // Login to Discord
         // Start health check server for Render
